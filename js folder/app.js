@@ -40,7 +40,7 @@ const showMenuNews = data => {
 
     data.forEach(dat => {
         //get data length
-        const itemsLength = `${data.length} Items are Found`;
+        const itemsLength = `${data.length} Items are Found.`;
         searchField.value = itemsLength
 
         const makeDiv = document.createElement('div')
