@@ -26,7 +26,7 @@ const showMenuNews = data => {
     const showNews = document.getElementById('show-news')
     showNews.innerText = ''
     data.forEach(dat => {
-        console.log(dat)
+
         const makeDiv = document.createElement('div')
         makeDiv.innerHTML = `
         <div class="card mb-3 mt-4  style=" max-width: 540px;">
@@ -66,7 +66,7 @@ const showMenuNews = data => {
                             </div>
 
                             <div>
-                                <button onclick="loadNewsDetail('')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
+                                <button onclick="loadNewsDetail('${dat._id}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
                 
                             </div>
                         </div>
@@ -84,11 +84,19 @@ const showMenuNews = data => {
 }
 
 // show detail by modal
-const loadNewsDetail = () => {
-    const url = `https://openapi.programming-hero.com/api/news/`
+const loadNewsDetail = news_id => {
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`
     fetch(url)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => modalData(data.data))
+}
+const modalData = newId => {
+    newId.forEach(news => {
+        const modalTitle = document.getElementById('title-id')
+        modalTitle.innerText = news.title
+        const newsDetails = document.getElementById('news-details')
+        newsDetails.innerText = news.details
+    })
 }
 
 
