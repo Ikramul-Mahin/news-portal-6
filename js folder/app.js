@@ -84,19 +84,22 @@ const showMenuNews = data => {
 }
 
 // show detail by modal
-const loadNewsDetail = () => {
-    const url = `https://openapi.programming-hero.com/api/news/categories`
+const loadNewsDetail = category_id => {
+    const url = `https://openapi.programming-hero.com/api/news/categories/${category_id}`
     fetch(url)
         .then(res => res.json())
         .then(data => modalNews(data.data))
 }
-const modalNews = news_category => {
-    console.log(data.news_category)
+const modalNews = dat => {
+    const modalTitle = document.getElementById('title-id')
+    modalTitle.innerText = dat.title
 }
+
+
 
 // getMenuNews()
 loadNewsDetail()
-showDetails()
+loadAllNews()
 
 
 
