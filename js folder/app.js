@@ -7,7 +7,6 @@ const loadAllNews = () => {
 const setAllMenu = news_category => {
     const setMenu = document.getElementById('nav-menu')
     news_category.forEach(category => {
-
         const link = document.createElement('a')
         link.innerHTML = `<a onclick="getMenuNews('${category.category_id}')"  class="fw-bolder border-2 btn btn-outline-primary" href="#">${category.category_name}</a>`
         setMenu.appendChild(link)
@@ -32,10 +31,17 @@ const getMenuNews = (category_id) => {
         .then(data => showMenuNews(data.data))
     toggleSpinner(true)
 }
+
 const showMenuNews = data => {
     const showNews = document.getElementById('show-news')
-    showNews.innerText = ''
+    showNews.innerText = '';
+    const searchField = document.getElementById('text-field')
+    searchField.value = ''
+
     data.forEach(dat => {
+        //get data length
+        const itemsLength = `${data.length} Items are Found`;
+        searchField.value = itemsLength
 
         const makeDiv = document.createElement('div')
         makeDiv.innerHTML = `
@@ -46,7 +52,7 @@ const showMenuNews = data => {
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">${dat.title}</h5>
+                            <h5 class="card-title">${dat.title ? dat.title : 'No title found'}</h5>
                             <p class="card-text">${dat.details.slice(0, 200) + '...'}</p>
                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
@@ -57,8 +63,8 @@ const showMenuNews = data => {
                                 </div>
 
                                 <div class="me-1">
-                                    <h7>${dat.author.name}</h7>
-                                    <p>${dat.author.published_date}</p>
+                                    <h7>${dat.author.name ? dat.author.name : 'No Name Found.'}</h7>
+                                    <p>${dat.author.published_date ? dat.author.published_date : 'Date not found.'}</p>
                                 </div>
                             </div>
 
@@ -72,7 +78,7 @@ const showMenuNews = data => {
                                             d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
                                     </svg>
                                 </div>
-                                <div>${dat.total_view}</div>
+                                <div>${dat.total_view ? dat.total_view : 'no view'}</div>
                             </div>
 
                             <div>
@@ -90,8 +96,10 @@ const showMenuNews = data => {
         
         `
         showNews.appendChild(makeDiv)
+
     })
     toggleSpinner(false)
+
 }
 
 // show detail by modal
