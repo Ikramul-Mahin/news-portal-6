@@ -40,9 +40,9 @@ const showMenuNews = data => {
                             <p class="card-text">${dat.details.slice(0, 200) + '...'}</p>
                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
-                        <div class="d-flex ">
+                        <div class="d-flex px-3 justify-content-between">
                             <div class="d-flex">
-                                <div>
+                                <div class="mt-2">
                                     <img class="author" src="${dat.author.img}" alt="">
                                 </div>
 
@@ -52,8 +52,8 @@ const showMenuNews = data => {
                                 </div>
                             </div>
 
-                            <div class="d-flex">
-                                <div>
+                            <div class="d-flex px-4 mt-2 ">
+                                <div class="px-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-eye" viewBox="0 0 16 16">
                                         <path
@@ -99,11 +99,6 @@ const modalData = newId => {
     })
 }
 
-
-
-
-// getMenuNews()
-loadNewsDetail()
 loadAllNews()
 
 
