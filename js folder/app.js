@@ -7,7 +7,7 @@ const loadAllNews = () => {
 const setAllMenu = news_category => {
     const setMenu = document.getElementById('nav-menu')
     news_category.forEach(category => {
-        // console.log(news_category.category_id)
+
         const link = document.createElement('a')
         link.classList.add('menu')
         link.innerHTML = `<a onclick="getMenuNews('${category.category_id}')"  class="" href="#">${category.category_name}</a>`
@@ -84,16 +84,13 @@ const showMenuNews = data => {
 }
 
 // show detail by modal
-const loadNewsDetail = category_id => {
-    const url = `https://openapi.programming-hero.com/api/news/categories/${category_id}`
+const loadNewsDetail = () => {
+    const url = `https://openapi.programming-hero.com/api/news/`
     fetch(url)
         .then(res => res.json())
-        .then(data => modalNews(data.data))
+        .then(data => console.log(data))
 }
-const modalNews = dat => {
-    const modalTitle = document.getElementById('title-id')
-    modalTitle.innerText = dat.title
-}
+
 
 
 
