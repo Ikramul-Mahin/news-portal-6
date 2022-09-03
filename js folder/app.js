@@ -111,14 +111,19 @@ const loadNewsDetail = news_id => {
 }
 const modalData = newId => {
     newId.forEach(news => {
+        console.log(news)
         const modalTitle = document.getElementById('title-id')
         modalTitle.innerText = news.title
         const newsDetails = document.getElementById('news-details')
-        newsDetails.innerText = news.details
+        newsDetails.innerHTML = `
+        <img class="img-fluid" src="${news.image_url}" alt="">
+        <p>${news.details}</p>               
+        `
     })
 }
 
 loadAllNews()
+getMenuNews('01')
 
 
 
