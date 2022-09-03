@@ -9,10 +9,19 @@ const setAllMenu = news_category => {
     news_category.forEach(category => {
 
         const link = document.createElement('a')
-        link.classList.add('menu')
-        link.innerHTML = `<a onclick="getMenuNews('${category.category_id}')"  class="" href="#">${category.category_name}</a>`
+        link.innerHTML = `<a onclick="getMenuNews('${category.category_id}')"  class="fw-bolder border-2 btn btn-outline-primary" href="#">${category.category_name}</a>`
         setMenu.appendChild(link)
     });
+}
+
+// spinner
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementById('loader')
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    } else {
+        loaderSection.classList.add('d-none')
+    }
 }
 
 // display menu news by click
@@ -21,6 +30,7 @@ const getMenuNews = (category_id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => showMenuNews(data.data))
+    toggleSpinner(true)
 }
 const showMenuNews = data => {
     const showNews = document.getElementById('show-news')
@@ -81,6 +91,7 @@ const showMenuNews = data => {
         `
         showNews.appendChild(makeDiv)
     })
+    toggleSpinner(false)
 }
 
 // show detail by modal
