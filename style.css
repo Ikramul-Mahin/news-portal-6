@@ -1,0 +1,16 @@
+.menu {
+    padding: 3px;
+    text-decoration: none;
+
+}
+
+.menu:hover {
+    border: 2px solid rgb(47, 47, 202);
+    border-radius: 5px;
+}
+
+.author {
+    height: 30%;
+    width: 40%;
+    border-radius: 50%;
+}
