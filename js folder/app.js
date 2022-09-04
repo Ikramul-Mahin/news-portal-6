@@ -1,14 +1,15 @@
 //display menu links
-const loadAllNews = () => {
-    fetch('https://openapi.programming-hero.com/api/news/categories')
-        .then(res => res.json())
-        .then(data => setAllMenu(data.data.news_category))
+const loadAllNews = async () => {
+    const url = 'https://openapi.programming-hero.com/api/news/categories'
+    const res = await fetch(url)
+    const data = await res.json()
+    setAllMenu(data.data.news_category)
 }
 const setAllMenu = news_category => {
     const setMenu = document.getElementById('nav-menu')
     news_category.forEach(category => {
         const link = document.createElement('a')
-        link.innerHTML = `<a onclick="getMenuNews('${category.category_id}')"  class="fw-bolder border-2 btn btn-outline-primary" href="#">${category.category_name}</a>`
+        link.innerHTML = `<a onclick="getMenuNews('${category.category_id}')"  class="fw-bolder border-2 btn btn-outline-primary w-100" href="#">${category.category_name}</a>`
         setMenu.appendChild(link)
     });
 }
@@ -25,7 +26,7 @@ const toggleSpinner = isLoading => {
 
 // display menu news by click
 const getMenuNews = (category_id) => {
-    const url = ` https://openapi.programming-hero.com/api/news/category/${category_id}`
+    const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`
     fetch(url)
         .then(res => res.json())
         .then(data => showMenuNews(data.data))
@@ -48,7 +49,7 @@ const showMenuNews = data => {
         <div class="card mb-3 mt-4  style=" max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">
-                        <img src="${dat.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                        <img src="${dat.thumbnail_url}" class="img-fluid rounded-start w-100" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -56,15 +57,15 @@ const showMenuNews = data => {
                             <p class="card-text">${dat.details.slice(0, 200) + '...'}</p>
                             <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
-                        <div class="d-flex px-3 justify-content-between">
+                        <div class="d-flex px-3 justify-content-between align-items-center">
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <img class="author" src="${dat.author.img}" alt="">
                                 </div>
 
-                                <div class="me-1">
+                                <div class="me-1 px-2">
                                     <h7>${dat.author.name ? dat.author.name : 'No Name Found.'}</h7>
-                                    <p>${dat.author.published_date ? dat.author.published_date : 'Date not found.'}</p>
+                                    <p class="d-none d-sm-block" >${dat.author.published_date ? dat.author.published_date : 'Date not found.'}</p>
                                 </div>
                             </div>
 
@@ -103,11 +104,11 @@ const showMenuNews = data => {
 }
 
 // show detail by modal
-const loadNewsDetail = news_id => {
+const loadNewsDetail = async news_id => {
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`
-    fetch(url)
-        .then(res => res.json())
-        .then(data => modalData(data.data))
+    const res = await fetch(url)
+    const data = await res.json()
+    modalData(data.data)
 }
 const modalData = newId => {
     newId.forEach(news => {
